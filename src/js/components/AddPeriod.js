@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var AppActions = require('../actions/AppActions');
+var PeriodActions = require('../actions/PeriodActions');
 
 var AddPeriod = React.createClass({
   getInitialState: function() {
@@ -12,7 +12,7 @@ var AddPeriod = React.createClass({
     };
   },
   handleClick: function() {
-    AppActions.addPeriod(this.state);
+    PeriodActions.addPeriod(this.state);
   },
   handleNameChange: function(event) {
     console.log(event);

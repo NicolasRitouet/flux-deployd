@@ -5,14 +5,23 @@ var assign = require('react/lib/Object.assign');
 
 
 
-var _periods = [
-  {
-    name: "Second semestre 2015",
-    start: "2015-01-01",
-    end: "2015-06-30"
-  }
-];
+var _periods = [];
 
+
+function _addPeriod(period) {
+  console.log('Add period', period);
+  _periods.push(period);
+}
+
+function _removePeriod(periodId) {
+  console.log("Removing period", periodId, _periods);
+  _periods.forEach(function(period, index) {
+    if (period.id === periodId) {
+      console.log(period, index);
+      _periods.splice(index, 1);
+    }
+  });
+}
 
 var AppStore = assign(EventEmitter.prototype, {
   emitChange: function() {
@@ -32,23 +41,31 @@ var AppStore = assign(EventEmitter.prototype, {
     var action = payload.action;
     switch(action.actionType) {
       case AppConstants.ActionTypes.ADD_PERIOD:
-        console.log('Dispatcher index:', payload.action.period);
         _addPeriod(payload.action.period);
         break;
+      case AppConstants.ActionTypes.REMOVE_PERIOD:
+        _removePeriod(payload.action.index)
+        break;
+      case AppConstants.api.GET_PERIOD_DATA:
+        if (payload.action.response !== AppConstants.request.PENDING) {
+          console.log(payload);
+          periods = payload.action.response.body;
+          _periods = periods;
+        }
+        break;
+      case AppConstants.api.ADD_PERIOD_DATA:
+        if (payload.action.response !== AppConstants.request.PENDING) {
+          periods = payload.action.response.body;
+          _periods = periods;
+        }
+        break;
+
     }
     AppStore.emitChange();
     return true;
   })
 });
 
-
-
-
-
-function _addPeriod(period) {
-  console.log('Add period', period);
-  _periods.push(period);
-}
 
 
 module.exports = AppStore;

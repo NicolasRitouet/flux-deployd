@@ -11,6 +11,16 @@ module.exports = {
   ActionSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null
+  }),
+  api: keyMirror({
+    GET_PERIOD_DATA: null,
+    POST_PERIOD_DATA: null,
+    DELETE_PERIOD_DATA: null
+  }),
+  request: keyMirror({
+    PENDING: null,
+    ERROR: null,
+    TIMEOUT: null
   })
 
 };

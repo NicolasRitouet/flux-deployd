@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var AppActions = require('../actions/AppActions');
+var PeriodActions = require('../actions/PeriodActions');
 var Header = require('./Header');
 var Sidebar = require('./Sidebar');
 var ListPeriods = require('./ListPeriods');
@@ -11,7 +11,7 @@ var Footer = require('./Footer');
 var APP = React.createClass({
 
   handleClick: function() {
-    AppActions.addPeriod(this.props.period);
+    PeriodActions.addPeriod(this.props.period);
   },
   render: function() {
     return (
