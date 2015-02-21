@@ -10,25 +10,30 @@ gulp.task('browserify', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('copy', function() {
-  gulp.src('src/index.html')
+gulp.task('copyhtml', function() {
+  gulp.src(['src/index.html', 'src/style/**/*.*'])
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('copycss', function() {
+  gulp.src('src/style/**/*.*')
+    .pipe(gulp.dest('dist/style'));
+});
+
 gulp.task('watch', function() {
-  gulp.watch('src/**/*.*', ['browserify', 'copy']);
+  gulp.watch('src/**/*.*', ['browserify', 'copyhtml', 'copycss']);
 });
 
 gulp.task('server', function() {
   connect.server({
-      root: './dist',
-      host: 'localhost',
-      port: 8080,
-      livereload: {
-        port: 35929
-      }
-    });
+    root: './dist',
+    host: 'localhost',
+    port: 3000,
+    livereload: {
+      port: 35929
+    }
+  });
 });
 
 
-gulp.task('default', ['browserify', 'copy', 'watch', 'server']);
+gulp.task('default', ['browserify', 'copyhtml', 'copycss', 'watch', 'server']);

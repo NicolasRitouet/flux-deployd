@@ -2,6 +2,11 @@
 
 var React = require('react');
 var AppActions = require('../actions/AppActions');
+var Header = require('./Header');
+var Sidebar = require('./Sidebar');
+var ListPeriods = require('./ListPeriods');
+var AddPeriod = require('./AddPeriod');
+var Footer = require('./Footer');
 
 var APP = React.createClass({
 
@@ -11,8 +16,20 @@ var APP = React.createClass({
   render: function() {
     return (
       <div>
-        <h1>Flux with Deployd</h1>
-        <button onClick={this.handleClick}>Add Period</button>
+        <Header />
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-sm-3">
+                <Sidebar />
+            </div>
+            <div className="col-sm-9">
+              <h4>Name of page</h4>
+              <ListPeriods />
+              <AddPeriod />
+            </div>
+          </div>
+        </div>
+        <Footer />
       </div>
     )
   }
